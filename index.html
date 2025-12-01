@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Padmanabhasimha — PANMO Martech (Teal Edition)</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy-900: #041322;     /* deep navy background */
+    --navy-800: #072033;
+    --teal-500: #18c6b7;     /* main accent teal */
+    --teal-300: #8ff3e8;     /* soft teal */
+    --lime-400: #b7ff6b;     /* neon lime accent */
+    --card-glass: rgba(255,255,255,0.03);
+    --muted: #9fb0b9;
+    --text: #e7f6f5;
+    --glass-border: rgba(140,235,220,0.08);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    background:
+      radial-gradient(circle at 10% 20%, rgba(24,198,183,0.06), transparent 5%),
+      radial-gradient(circle at 90% 80%, rgba(183,255,107,0.04), transparent 6%),
+      linear-gradient(180deg,var(--navy-900), var(--navy-800));
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:30px;
+  }
+
+  /* layout */
+  .container {
+    max-width:1300px; margin:0 auto; min-height:calc(100vh - 60px);
+    display:grid; grid-template-columns: 1fr 420px; gap:28px;
+  }
+  @media (max-width:980px){ .container{grid-template-columns:1fr; padding-bottom:40px} }
+
+  /* left column */
+  .left { display:flex; flex-direction:column; gap:20px; padding:16px; }
+
+  /* hero */
+  .hero {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:16px; padding:26px; position:relative; overflow:hidden;
+    border:1px solid var(--glass-border);
+    box-shadow: 0 12px 40px rgba(2,8,15,0.6);
+  }
+  .hero .top {
+    display:flex; gap:16px; align-items:center;
+  }
+  .mark {
+    width:68px;height:68px;border-radius:12px;
+    background: linear-gradient(135deg, rgba(24,198,183,0.14), rgba(183,255,107,0.06));
+    display:flex;align-items:center;justify-content:center;border:1px solid rgba(24,198,183,0.12);
+  }
+  .brand {
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:800; font-size:28px; color:var(--teal-300);
+    letter-spacing:1px;
+  }
+  .subtitle { color:var(--muted); font-size:13px; margin-top:6px }
+
+  .hero p { margin-top:12px; color:#dff7f3; line-height:1.45; font-size:16px; max-width:70ch }
+  .hero .ctas { margin-top:16px; display:flex; gap:10px; flex-wrap:wrap }
+  .btn { border:none; cursor:pointer; padding:10px 16px; border-radius:12px; font-weight:700; transition:transform .18s ease }
+  .btn-primary { background: linear-gradient(90deg,var(--teal-500),var(--teal-300)); color:#032026 }
+  .btn-ghost { background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--teal-300) }
+  .btn:hover { transform: translateY(-6px) }
+
+  /* services area */
+  .services {
+    display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;
+  }
+  .service-pill {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding:10px 14px; border-radius:30px; color:var(--teal-300);
+    font-weight:700; border:1px solid rgba(24,198,183,0.06); box-shadow: 0 8px 18px rgba(2,8,12,0.6);
+    transition:transform .18s ease;
+  }
+  .service-pill:hover { transform: translateY(-6px); box-shadow:0 18px 40px rgba(24,198,183,0.06) }
+
+  /* portfolio container */
+  .portfolio {
+    background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+    border-radius:12px; padding:14px;
+    border:1px solid rgba(255,255,255,0.02);
+  }
+  .portfolio-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px }
+  .portfolio-grid {
+    display:grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap:12px;
+  }
+  .tile {
+    height:110px; border-radius:10px; overflow:hidden; position:relative;
+    background:linear-gradient(180deg, rgba(255,255,255,0.008), rgba(255,255,255,0.006));
+    border:1px solid rgba(255,255,255,0.02); display:flex; align-items:center; justify-content:center;
+    color:var(--muted); font-weight:700; cursor:pointer; transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .tile:hover{ transform: translateY(-8px); box-shadow: 0 12px 36px rgba(24,198,183,0.05) }
+  .tile img{ width:100%; height:100%; object-fit:cover; display:block }
+  .tile .title { position:absolute; left:8px; bottom:8px; right:8px; color:#042426; font-size:12px; font-weight:700; background:linear-gradient(180deg, rgba(255,255,255,0.0), rgba(0,0,0,0.28)); padding:6px; border-radius:8px; color:white }
+
+  /* right column */
+  .right { display:flex; flex-direction:column; gap:16px; padding:12px }
+  .panel {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
+    border-radius:12px; padding:16px; border:1px solid rgba(255,255,255,0.02);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.6);
+  }
+  .panel .row { display:flex; align-items:center; gap:12px }
+  .ally-logo { width:56px;height:56px;border-radius:10px; object-fit:cover; border:1px solid rgba(255,255,255,0.03) }
+
+  .contact { margin-top:10px }
+  .contact .label { color:var(--muted); font-size:13px }
+  .contact .value { font-weight:700; color:var(--teal-300) }
+
+  /* small center footer */
+  footer{ text-align:center; color:rgba(255,255,255,0.03); margin-top:18px; font-size:13px }
+
+  /* overlay (Allied partner) */
+  #overlay {
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:9999;
+    background: rgba(2,6,10,0.82);
+  }
+  #overlay .box {
+    width:96%; max-width:1100px; height:86vh; border-radius:12px; overflow:hidden; background: #021417;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6); border:1px solid rgba(24,198,183,0.06);
+  }
+  #overlay iframe{ width:100%; height:100%; border:none; display:block }
+  #overlay .close {
+    position:absolute; right:28px; top:24px; background:var(--teal-300); color:#042426; border:none; padding:8px 12px; border-radius:9px; font-weight:800; cursor:pointer;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container" role="main">
+
+  <!-- LEFT -->
+  <div class="left">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="brandTitle">
+      <div class="top">
+        <div class="mark" aria-hidden>
+          <!-- mark svg -->
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="rgba(24,198,183,0.12)" stroke-width="1.2"/>
+            <path d="M6 14c3-2.2 6-2.4 10-0.7" stroke="rgba(183,255,107,0.9)" stroke-width="1.6" stroke-linecap="round" />
+            <circle cx="16" cy="7" r="1.6" fill="rgba(24,198,183,0.95)"/>
+          </svg>
+        </div>
+
+        <div>
+          <div id="brandTitle" class="brand">PADMANABHASIMHA</div>
+          <div class="subtitle">PANMO Martech — Futuristic Creative & Growth</div>
+        </div>
+      </div>
+
+      <p>
+        We design AI-first creative campaigns, dynamic ad systems and playful brand experiences with measurable impact.
+        This page is a focused brochure: tech & project details are only viewable via our allied partner page (click the allied button).
+      </p>
+
+      <div class="ctas">
+        <button class="btn btn-primary" onclick="ctaContact()">Start a Project</button>
+        <button class="btn btn-ghost" onclick="openAllied()">View Allied Partner</button>
+        <button class="btn btn-ghost" onclick="scrollPortfolio()">Explore Portfolio</button>
+      </div>
+
+      <div style="margin-top:14px" class="services" aria-label="service pills">
+        <div class="service-pill">Creative Systems</div>
+        <div class="service-pill">AI Ad Automation</div>
+        <div class="service-pill">Motion & UI</div>
+        <div class="service-pill">Analytics & BI</div>
+        <div class="service-pill">Campaign Ops</div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="portfolio" aria-labelledby="portfolioTitle">
+      <div class="portfolio-head">
+        <div>
+          <div style="font-size:16px; color:var(--teal-300); font-weight:800">Portfolio — Past Works</div>
+          <div style="font-size:12px; color:var(--muted)">Auto-loaded from your Google Drive (optional)</div>
+        </div>
+        <div style="display:flex; gap:8px">
+          <button class="btn btn-ghost" onclick="refreshDrive()">Refresh</button>
+        </div>
+      </div>
+
+      <div id="portfolioGrid" class="portfolio-grid" aria-live="polite">
+        <div style="grid-column:1/-1; padding:18px; color:var(--muted); background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008)); border-radius:8px">
+          Portfolio preview is disabled until you enable the Drive API key (see JS comment). Meanwhile, use the <strong>Open Drive</strong> button when available.
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- RIGHT -->
+  <aside class="right" aria-label="sidebar">
+    <div class="panel">
+      <div class="row" style="justify-content:space-between">
+        <div class="row" style="gap:12px">
+          <img class="ally-logo" src="https://purnvasu-site.vercel.app/logo.png" onerror="this.src='https://avatars.githubusercontent.com/u/9919?s=200&v=4'" alt="Allied logo">
+          <div>
+            <div style="font-weight:800; color:var(--teal-300)">PurnVasu Tech Solutions</div>
+            <div style="font-size:13px; color:var(--muted)">Allied partner — click to open their site</div>
+          </div>
+        </div>
+
+        <div style="font-size:12px; color:var(--muted)">Trusted • Tech</div>
+      </div>
+
+      <!-- NOTE: intentionally NO detailed project counts or tech service breakdown here -->
+      <div class="contact" style="margin-top:14px">
+        <div class="label">Phone</div>
+        <div class="value">+91 7032933445</div>
+
+        <div style="height:10px"></div>
+
+        <div class="label">Email</div>
+        <div class="value">PANMO@gmail.com</div>
+
+        <div style="height:12px"></div>
+        <button class="btn btn-primary" onclick="ctaContact()">Let's Talk</button>
+        <button class="btn btn-ghost" style="margin-left:8px" onclick="openAllied()">Open Allied</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div style="font-weight:800; color:var(--teal-300)">Why Choose Us</div>
+      <ul style="margin-top:8px; color:var(--muted); list-style:none; padding-left:0; line-height:1.8">
+        <li>• AI-first creative systems</li>
+        <li>• Performance & design unified</li>
+        <li>• Privacy-first integrations</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <div style="font-weight:800; color:var(--teal-300)">Quick CTA</div>
+      <div style="margin-top:8px; color:var(--muted)">Open the allied page to see detailed tech services & project history — we keep those details inside their site for controlled access.</div>
+      <div style="margin-top:12px">
+        <button class="btn btn-primary" onclick="openAllied()">Open PurnVasu</button>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<footer>© Padmanabhasimha • PANMO Martech — built with craft & a little neon</footer>
+
+<!-- OVERLAY for allied partner (NO TECH DETAILS shown on main page) -->
+<div id="overlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="box" role="document">
+    <button class="close" onclick="closeAllied()">CLOSE</button>
+    <iframe id="allyFrame" src="" title="Allied partner site"></iframe>
+  </div>
+</div>
+
+<script>
+/*
+  DRIVE INTEGRATION NOTES:
+  - To auto-list files from your Google Drive folder, set API_KEY below and ensure the folder/files are shared "Anyone with the link".
+  - Steps:
+    1) Google Cloud Console -> Enable Google Drive API
+    2) Create an API key (you can restrict it)
+    3) Paste API key into API_KEY variable
+    4) Reload this page. Files will be listed in the portfolio grid.
+
+  Security note: Using API key in client-side is okay for simple public folder listing, but if you need privacy or quotas, use a small backend proxy (recommended).
+*/
+
+const API_KEY = ""; // <-- OPTIONAL: add your Drive API key to enable live portfolio
+const FOLDER_ID = "1xrmUHs-qTrJYMRisR47XFi_kFk0ISmL3"; // your shared folder
+
+const portfolioGrid = document.getElementById('portfolioGrid');
+
+function escapeHtml(str){ return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
+
+async function listDriveFiles(){
+  if(!API_KEY){
+    // fallback CTA tile
+    portfolioGrid.innerHTML = `
+      <div style="grid-column:1/-1; padding:18px; border-radius:8px; color:var(--muted); background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008))">
+        <div style="font-weight:800; color:var(--teal-300); margin-bottom:8px">Drive listing is disabled</div>
+        <div style="margin-bottom:10px">To enable a live gallery, paste your Google Drive API key into the script.</div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="openDrive()">Open Drive Folder</button>
+        </div>
+      </div>`;
+    return;
+  }
+
+  portfolioGrid.innerHTML = `<div style="grid-column:1/-1; padding:18px; color:var(--muted)">Fetching files…</div>`;
+
+  const q = encodeURIComponent(`'${FOLDER_ID}'+in+parents+and+trashed=false`);
+  const url = `https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name,mimeType,thumbnailLink,webViewLink)&pageSize=200&key=${API_KEY}`;
+
+  try{
+    const res = await fetch(url);
+    const json = await res.json();
+    if(!json.files || json.files.length===0){
+      portfolioGrid.innerHTML = `<div style="grid-column:1/-1; padding:18px; color:var(--muted)">No files found in folder or folder isn't shared publicly.</div>`;
+      return;
+    }
+
+    // render tiles
+    const tiles = json.files.map(f => {
+      const title = escapeHtml(f.name);
+      const view = f.webViewLink || `https://drive.google.com/file/d/${f.id}/view`;
+      const isImg = f.mimeType && f.mimeType.startsWith('image/');
+      const thumb = f.thumbnailLink || '';
+
+      if(isImg){
+        return `<div class="tile" onclick="window.open('${view}','_blank')">
+                  ${thumb ? `<img src="${thumb}" alt="${title}">` : `<div style="padding:8px;color:var(--muted)">${title}</div>`}
+                  <div class="title">${title}</div>
+                </div>`;
+      } else {
+        // generic
+        const icon = f.mimeType && f.mimeType.startsWith('video/') ? '▶' : '📄';
+        return `<div class="tile" onclick="window.open('${view}','_blank')">
+                 <div style="display:flex;align-items:center;gap:10px;color:var(--muted);font-weight:800">${icon}<div>${title}</div></div>
+                </div>`;
+      }
+    });
+
+    portfolioGrid.innerHTML = tiles.join('');
+  }catch(err){
+    console.error(err);
+    portfolioGrid.innerHTML = `<div style="grid-column:1/-1; padding:18px; color:var(--muted)">Error fetching Drive files — check API key & folder sharing.<br><small style="color:rgba(255,255,255,0.06)">${err}</small></div>`;
+  }
+}
+
+function refreshDrive(){ listDriveFiles(); }
+function openDrive(){ window.open(`https://drive.google.com/drive/folders/${FOLDER_ID}`,'_blank') }
+
+/* allied overlay behavior (NO TECH DETAILS on main page) */
+function openAllied(){
+  document.getElementById('overlay').style.display = 'flex';
+  document.getElementById('overlay').setAttribute('aria-hidden','false');
+  document.getElementById('allyFrame').src = 'https://purnvasu-site.vercel.app/';
+}
+function closeAllied(){
+  document.getElementById('overlay').style.display = 'none';
+  document.getElementById('overlay').setAttribute('aria-hidden','true');
+  document.getElementById('allyFrame').src = '';
+}
+
+/* start */
+listDriveFiles();
+
+/* small helpers */
+function ctaContact(){ alert('This will open your contact modal or launch an email in production. Placeholder: Phone XXXX / Email YYYY'); }
+function scrollPortfolio(){ document.getElementById('portfolio').scrollIntoView({behavior:'smooth', block:'start'}); }
+</script>
+
+</body>
+</html>
